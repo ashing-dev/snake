@@ -13,16 +13,15 @@ var snake_queue: Array[Vector2] = []
 # during a game tick.
 var travel_direction: Vector2 = DIR_NORTH
 
-var lengthen_snake: bool = false 
+var snake_start_position: Vector2 = Vector2(5, 5)
 
-func _init(start_pos: Vector2):
-	snake_queue.push_back(start_pos)
+var lengthen_snake: bool = false 
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	snake_queue.push_back(snake_start_position)
 	global_position = get_head_location() * Cell.CELL_WIDTH
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

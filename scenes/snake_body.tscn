@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bof5nda1lcnwv"]
+
+[ext_resource type="Texture2D" uid="uid://cywnggmj8m63g" path="res://textures/snake_body.tres" id="1_tmfdg"]
+
+[node name="SnakeBody" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_tmfdg")

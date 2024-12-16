@@ -1,3 +1,10 @@
-[gd_scene format=3 uid="uid://dv7m1pakngkqq"]
+[gd_scene load_steps=3 format=3 uid="uid://dv7m1pakngkqq"]
+
+[ext_resource type="Script" path="res://scripts/snake.gd" id="1_aacku"]
+[ext_resource type="Texture2D" uid="uid://dw60hgmmiua6u" path="res://textures/snake_head.tres" id="1_dju2p"]
 
 [node name="Snake" type="Node2D"]
+script = ExtResource("1_aacku")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_dju2p")

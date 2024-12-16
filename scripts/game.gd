@@ -2,14 +2,16 @@ extends Node2D
 
 class_name Game
 
-var field: Field
-var snake: Snake
+var snake_scene = preload("res://scenes/snake.tscn")
+var field
+var snake
 
 var score: int = 0
 
 func _init(_field:Field) -> void:
 	field = _field
-	snake = Snake.new(Vector2(5, 5)) # TODO: Randomize starting location
+	snake = snake_scene.instantiate()
+	snake.snake_start_position = Vector2(8,8) # TODO: Randomize starting location
 	add_child(field)
 	add_child(snake)
 
