@@ -21,7 +21,7 @@ func _init(start_pos: Vector2):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	set_position(get_head_location() * Cell.CELL_WIDTH)
+	global_position = get_head_location() * Cell.CELL_WIDTH
 	pass # Replace with function body.
 
 
