@@ -16,6 +16,7 @@ func _init(_field:Field, tick_interval: float = 1.0) -> void:
 	timer = _new_timer(tick_interval)
 	snake = _new_snake(field, timer)
 	field.snake = snake
+	field.set_random_food_cell()
 
 	add_child(field)
 	add_child(snake)
@@ -31,7 +32,12 @@ func _check_collisions() -> void:
 	if _is_snake_touching_self() || _is_snake_touching_boundary():
 		print("game over")
 		timer.stop()
-		snake.queue_free()
+		# snake.queue_free()
+
+	if _is_snake_touching_food():
+		snake.lengthen_snake = true
+		field.set_random_food_cell()
+		score += 50
 
 func _new_timer(tick_interval: float) -> Timer:
 	var _timer = Timer.new()
@@ -66,3 +72,6 @@ func _is_snake_touching_boundary() -> bool:
 			return true
 
 	return false
+
+func _is_snake_touching_food() -> bool:
+	return snake.get_head_location() == field.food_cell.location

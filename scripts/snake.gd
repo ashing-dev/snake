@@ -40,6 +40,8 @@ func _process(_delta: float) -> void:
 	# _unhandled_input which has more a bit more complication/nuance.
 	# See https://docs.godotengine.org/en/stable/tutorials/inputs/inputevent.html
 
+	# BUG: This only checks against the last registered travel direction, NOT the actual last direction traveled. So in one tick you can still turn around into yourself.
+	# Relatively minor, in the grand scheme of things.
 	if Input.is_action_just_pressed("move_north"):
 		_update_travel_direction(DIR_NORTH)
 	elif Input.is_action_just_pressed("move_south"):
@@ -72,11 +74,11 @@ func _update_travel_direction(dir: Vector2) -> void:
 
 func _on_tick() -> void:
 	_move()
-	_eat()
 	snake_moved.emit()
 
 
 func _move() -> void:
+	print(len(snake_queue))
 	var old_location = snake_queue[0]
 	var new_location = old_location + travel_direction
 	if !lengthen_snake:
@@ -88,22 +90,18 @@ func _move() -> void:
 		if child != null:
 			$BodyContainer.remove_child(child)
 			child.queue_free()
-	else:
+	
+	if len(snake_queue) > 0:
 		var new_child = snake_body_scene.instantiate()
 		new_child.global_position = old_location * Cell.CELL_WIDTH
 		new_child.name = CHILD_NAME_TEMPLATE % [old_location.x, old_location.y]
 		$BodyContainer.add_child(new_child)
+		new_child.owner = $BodyContainer
 
 	snake_queue.push_front(new_location)
 
 	lengthen_snake = false
 
-func _eat() -> void:
-	# Need a field reference first.
-	# Which means we need a field.
-	# Which we don't have.
-	# Because I'm being slow.
-	pass
 
 
 func get_head_location() -> Vector2:
