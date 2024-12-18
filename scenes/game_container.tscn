@@ -21,3 +21,11 @@ offset_top = 75.0
 offset_right = 1077.0
 offset_bottom = 115.0
 text = "0"
+
+[node name="Extra" type="RichTextLabel" parent="."]
+offset_left = 935.0
+offset_top = 209.0
+offset_right = 1075.0
+offset_bottom = 249.0
+text = "
+"

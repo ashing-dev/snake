@@ -27,12 +27,13 @@ func _init(_field:Field, tick_interval: float = 1.0) -> void:
 
 func _ready() -> void:
 	global_position = Vector2(0, 0)
-	game_over.emit()
 
 func _check_collisions() -> void:
 	if _is_snake_touching_self() || _is_snake_touching_boundary():
-		print("game over")
 		timer.stop()
+		game_over.emit()
+		await get_tree().create_timer(3.0).timeout
+		get_tree().change_scene_to_file("res://scenes/title.tscn")
 
 	if _is_snake_touching_food():
 		snake.lengthen_snake = true
