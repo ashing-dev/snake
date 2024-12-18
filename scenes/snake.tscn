@@ -8,3 +8,5 @@ script = ExtResource("1_aacku")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_dju2p")
+
+[node name="BodyContainer" type="Node" parent="."]

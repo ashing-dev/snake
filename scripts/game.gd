@@ -1,5 +1,4 @@
 extends Node2D
-
 class_name Game
 
 var snake_scene = preload("res://scenes/snake.tscn")
@@ -10,9 +9,11 @@ var timer: Timer
 
 var score: int = 0
 
-func _init(_field:Field) -> void:
+signal game_over
+
+func _init(_field:Field, tick_interval: float = 1.0) -> void:
 	field = _field
-	timer = _new_timer()
+	timer = _new_timer(tick_interval)
 	snake = _new_snake(field, timer)
 	field.snake = snake
 
@@ -20,12 +21,21 @@ func _init(_field:Field) -> void:
 	add_child(snake)
 	add_child(timer)
 
+	snake.snake_moved.connect(_check_collisions)
+
 func _ready() -> void:
 	global_position = Vector2(0, 0)
+	game_over.emit()
 
-func _new_timer() -> Timer:
+func _check_collisions() -> void:
+	if _is_snake_touching_self() || _is_snake_touching_boundary():
+		print("game over")
+		timer.stop()
+		snake.queue_free()
+
+func _new_timer(tick_interval: float) -> Timer:
 	var _timer = Timer.new()
-	_timer.wait_time = 1.0
+	_timer.wait_time = tick_interval
 	_timer.autostart = true
 
 	return _timer
@@ -37,3 +47,22 @@ func _new_snake(_field: Field, _timer: Timer) -> Snake:
 	_snake.snake_start_position = Vector2(8,8) # TODO: Randomize starting location
 
 	return _snake
+
+func _is_snake_touching_self() -> bool:
+	var snake_loc = snake.get_head_location()
+	for loc in snake.snake_queue.slice(1, len(snake.snake_queue)):
+		if loc == snake_loc:
+			return true
+
+	return false
+
+func _is_snake_touching_boundary() -> bool:
+	var snake_loc = snake.get_head_location()
+
+	for cell in field.cells:
+		if !cell.is_boundary:
+			continue
+		if cell.location == snake_loc:
+			return true
+
+	return false

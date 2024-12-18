@@ -5,11 +5,19 @@ const cell_scene = preload("res://scenes/cell.tscn")
 
 var cells: Array
 var snake: Snake
+var food_cell: Cell
 
 func _init(width: int, height: int):
 	build_cells(width, height)
 	for cell in cells:
 		add_child(cell)
+
+func _cell_at(x: int, y: int):
+	# Kicking myself a bit now for not just making this a multidimensional array
+	# TODO: Unfuck this decision.
+	for cell in cells:
+		if cell.x == x && cell.y == y:
+			return cell
 
 func _ready():
 	global_position = Vector2(0, 0)

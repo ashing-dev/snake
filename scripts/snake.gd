@@ -6,6 +6,10 @@ const DIR_SOUTH = Vector2( 0,  1)
 const DIR_WEST	= Vector2(-1,  0)
 const DIR_EAST	= Vector2( 1,  0)
 
+const CHILD_NAME_TEMPLATE = "Body%d_%d"
+
+var snake_body_scene = preload("res://scenes/snake_body.tscn")
+
 # Vector2 array of all the nodes comprising the snake, where snakeQueue[0] is always the head of the snake.
 var snake_queue: Array[Vector2] = []
 
@@ -18,10 +22,13 @@ var lengthen_snake: bool = false
 var field: Field
 var timer: Timer
 
+signal snake_moved
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	snake_queue.push_back(snake_start_position)
+
 	update_global_position()
 	update_rotation()
 	timer.timeout.connect(_on_tick)
@@ -66,15 +73,30 @@ func _update_travel_direction(dir: Vector2) -> void:
 func _on_tick() -> void:
 	_move()
 	_eat()
+	snake_moved.emit()
 
 
 func _move() -> void:
 	var old_location = snake_queue[0]
-	if !lengthen_snake:
-		snake_queue.pop_back()
 	var new_location = old_location + travel_direction
+	if !lengthen_snake:
+		# Remove from the data model
+		var back = snake_queue.pop_back()
+
+		# Remove the actual node
+		var child = $BodyContainer.find_child(CHILD_NAME_TEMPLATE % [back.x, back.y])
+		if child != null:
+			$BodyContainer.remove_child(child)
+			child.queue_free()
+	else:
+		var new_child = snake_body_scene.instantiate()
+		new_child.global_position = old_location * Cell.CELL_WIDTH
+		new_child.name = CHILD_NAME_TEMPLATE % [old_location.x, old_location.y]
+		$BodyContainer.add_child(new_child)
+
 	snake_queue.push_front(new_location)
 
+	lengthen_snake = false
 
 func _eat() -> void:
 	# Need a field reference first.
