@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxlkuq7ywkey1"]
+
+[ext_resource type="Script" path="res://scripts/game_container.gd" id="1_1o35l"]
+
+[node name="GameContainer" type="Node2D"]
+script = ExtResource("1_1o35l")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(555, 305)
+
+[node name="ScoreLabel" type="RichTextLabel" parent="."]
+offset_left = 936.0
+offset_top = 24.0
+offset_right = 1076.0
+offset_bottom = 64.0
+text = "Score"
+
+[node name="ScoreValue" type="RichTextLabel" parent="."]
+offset_left = 937.0
+offset_top = 75.0
+offset_right = 1077.0
+offset_bottom = 115.0
+text = "0"

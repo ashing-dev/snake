@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://5allbtbcede6"]
+
+[ext_resource type="Script" path="res://scripts/title.gd" id="1_58ta5"]
+
+[sub_resource type="FontFile" id="FontFile_6tf3p"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[node name="Title" type="Node2D"]
+script = ExtResource("1_58ta5")
+
+[node name="TItle" type="RichTextLabel" parent="."]
+offset_left = 543.0
+offset_top = 186.0
+offset_right = 697.0
+offset_bottom = 214.0
+theme_override_fonts/normal_font = SubResource("FontFile_6tf3p")
+text = "Ashing Loves Snakes"
+
+[node name="CTA" type="RichTextLabel" parent="."]
+offset_left = 534.0
+offset_top = 324.0
+offset_right = 719.0
+offset_bottom = 352.0
+theme_override_fonts/normal_font = SubResource("FontFile_6tf3p")
+text = "Press Enter To Continue"
+
+[node name="Controls" type="RichTextLabel" parent="."]
+offset_left = 511.0
+offset_top = 480.0
+offset_right = 973.0
+offset_bottom = 584.0
+theme_override_fonts/normal_font = SubResource("FontFile_6tf3p")
+text = "You have three movement options:
+- WASD
+- Arrow Keys
+- Vim Keys"

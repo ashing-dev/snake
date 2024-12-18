@@ -40,8 +40,8 @@ func _process(_delta: float) -> void:
 	# _unhandled_input which has more a bit more complication/nuance.
 	# See https://docs.godotengine.org/en/stable/tutorials/inputs/inputevent.html
 
-	# BUG: This only checks against the last registered travel direction, NOT the actual last direction traveled. So in one tick you can still turn around into yourself.
-	# Relatively minor, in the grand scheme of things.
+	# BUG: This only checks against the last registered travel direction, NOT the actual last direction traveled.
+	# So in one tick you can still turn around into yourself. Relatively minor in the grand scheme of things. Fix later.
 	if Input.is_action_just_pressed("move_north"):
 		_update_travel_direction(DIR_NORTH)
 	elif Input.is_action_just_pressed("move_south"):
@@ -71,14 +71,11 @@ func _update_travel_direction(dir: Vector2) -> void:
 			if travel_direction != DIR_EAST:
 				travel_direction = DIR_WEST
 
-
 func _on_tick() -> void:
 	_move()
 	snake_moved.emit()
 
-
 func _move() -> void:
-	print(len(snake_queue))
 	var old_location = snake_queue[0]
 	var new_location = old_location + travel_direction
 	if !lengthen_snake:
@@ -102,11 +99,6 @@ func _move() -> void:
 
 	lengthen_snake = false
 
-
-
-func get_head_location() -> Vector2:
-	return snake_queue[0]
-
 func update_global_position() -> void:
 	global_position = get_head_location() * Cell.CELL_WIDTH
 	# The sprite is centered so we can rotate it easily, so we need to
@@ -123,3 +115,6 @@ func update_rotation() -> void:
 			$Sprite2D.global_rotation = deg_to_rad(270.0)
 		DIR_WEST:
 			$Sprite2D.global_rotation = deg_to_rad(90.0)
+
+func get_head_location() -> Vector2:
+	return snake_queue[0]

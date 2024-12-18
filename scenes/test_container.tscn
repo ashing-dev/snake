@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bxlkuq7ywkey1"]
-
-[ext_resource type="Script" path="res://scripts/test_container.gd" id="1_odevo"]
-
-[node name="TestContainer" type="Node2D"]
-script = ExtResource("1_odevo")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(555, 305)
