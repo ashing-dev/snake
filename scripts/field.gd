@@ -4,6 +4,7 @@ class_name Field
 const cell_scene = preload("res://scenes/cell.tscn")
 
 var cells: Array
+var snake: Snake
 
 func _init(width: int, height: int):
 	build_cells(width, height)

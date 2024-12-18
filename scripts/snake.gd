@@ -12,16 +12,19 @@ var snake_queue: Array[Vector2] = []
 # Tracks the snake's movement direction. Input only influences the direction of movement. Movement itself happens
 # during a game tick.
 var travel_direction: Vector2 = DIR_NORTH
-
 var snake_start_position: Vector2 = Vector2(5, 5)
+var lengthen_snake: bool = false
 
-var lengthen_snake: bool = false 
+var field: Field
+var timer: Timer
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	snake_queue.push_back(snake_start_position)
-	global_position = get_head_location() * Cell.CELL_WIDTH
+	update_global_position()
+	update_rotation()
+	timer.timeout.connect(_on_tick)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -39,10 +42,12 @@ func _process(_delta: float) -> void:
 	elif Input.is_action_just_pressed("move_west"):
 		_update_travel_direction(DIR_WEST)
 
+	update_global_position()
+	update_rotation()
+
 # Update the travel direction. If the new direction is an invalid option, the travel direction is not
 # changed. Note that in this case, validity is internal to the snake, so that it can't reverse on itself.
 func _update_travel_direction(dir: Vector2) -> void:
-	print("updating travel direction", dir)
 	match dir:
 		DIR_NORTH:
 			if travel_direction != DIR_SOUTH:
@@ -58,7 +63,7 @@ func _update_travel_direction(dir: Vector2) -> void:
 				travel_direction = DIR_WEST
 
 
-func on_tick() -> void:
+func _on_tick() -> void:
 	_move()
 	_eat()
 
@@ -69,7 +74,7 @@ func _move() -> void:
 		snake_queue.pop_back()
 	var new_location = old_location + travel_direction
 	snake_queue.push_front(new_location)
-	
+
 
 func _eat() -> void:
 	# Need a field reference first.
@@ -77,8 +82,24 @@ func _eat() -> void:
 	# Which we don't have.
 	# Because I'm being slow.
 	pass
-	
+
 
 func get_head_location() -> Vector2:
 	return snake_queue[0]
 
+func update_global_position() -> void:
+	global_position = get_head_location() * Cell.CELL_WIDTH
+	# The sprite is centered so we can rotate it easily, so we need to
+	# handle the offset in positioning.
+	global_position += Vector2(Cell.CELL_WIDTH/2.0, Cell.CELL_WIDTH/2.0)
+
+func update_rotation() -> void:
+	match travel_direction:
+		DIR_NORTH:
+			$Sprite2D.global_rotation = deg_to_rad(180.0)
+		DIR_SOUTH:
+			$Sprite2D.global_rotation = deg_to_rad(0.0)
+		DIR_EAST:
+			$Sprite2D.global_rotation = deg_to_rad(270.0)
+		DIR_WEST:
+			$Sprite2D.global_rotation = deg_to_rad(90.0)
