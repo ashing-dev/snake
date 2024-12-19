@@ -41,3 +41,7 @@ text = "You have three movement options:
 
 [node name="StartSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_kvhho")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(577, 324)
+scale = Vector2(-25, -20.5714)
