@@ -42,7 +42,7 @@ func check_collisions() -> void:
 		field.set_random_food_cell()
 		score += 50
 		score_changed.emit()
-		timer.wait_time = timer.wait_time * 0.98
+		timer.wait_time = timer.wait_time * 0.94
 
 
 func new_timer(tick_interval: float) -> Timer:
