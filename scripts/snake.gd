@@ -24,7 +24,6 @@ var timer: Timer
 
 signal snake_moved
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	snake_queue.push_back(snake_start_position)
@@ -54,6 +53,7 @@ func _process(_delta: float) -> void:
 	update_global_position()
 	update_rotation()
 
+
 # Update the travel direction. If the new direction is an invalid option, the travel direction is not
 # changed. Note that in this case, validity is internal to the snake, so that it can't reverse on itself.
 func _update_travel_direction(dir: Vector2) -> void:
@@ -71,9 +71,11 @@ func _update_travel_direction(dir: Vector2) -> void:
 			if travel_direction != DIR_EAST:
 				travel_direction = DIR_WEST
 
+
 func _on_tick() -> void:
 	_move()
 	snake_moved.emit()
+
 
 func _move() -> void:
 	var old_location = snake_queue[0]
@@ -99,11 +101,17 @@ func _move() -> void:
 
 	lengthen_snake = false
 
+
 func update_global_position() -> void:
 	global_position = get_head_location() * Cell.CELL_WIDTH
 	# The sprite is centered so we can rotate it easily, so we need to
 	# handle the offset in positioning.
 	global_position += Vector2(Cell.CELL_WIDTH/2.0, Cell.CELL_WIDTH/2.0)
+
+
+func play_eat_sound() -> void:
+	$EatSound.play()
+
 
 func update_rotation() -> void:
 	match travel_direction:
@@ -116,5 +124,7 @@ func update_rotation() -> void:
 		DIR_WEST:
 			$Sprite2D.global_rotation = deg_to_rad(90.0)
 
+
 func get_head_location() -> Vector2:
 	return snake_queue[0]
+

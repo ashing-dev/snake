@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://ujjmiw04b25i"]
+
+[ext_resource type="FontFile" uid="uid://bfcx7waom58wm" path="res://assets/fonts/pixelated_elegance/font.ttf" id="1_mihsi"]
+
+[resource]
+default_font = ExtResource("1_mihsi")
+default_font_size = 32

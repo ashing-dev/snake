@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dv7m1pakngkqq"]
+[gd_scene load_steps=4 format=3 uid="uid://dv7m1pakngkqq"]
 
 [ext_resource type="Script" path="res://scripts/snake.gd" id="1_aacku"]
 [ext_resource type="Texture2D" uid="uid://dw60hgmmiua6u" path="res://textures/snake_head.tres" id="1_dju2p"]
+[ext_resource type="AudioStream" uid="uid://c63e4h3e7dmbp" path="res://assets/sfx/eat.wav" id="3_ulu0y"]
 
 [node name="Snake" type="Node2D"]
 script = ExtResource("1_aacku")
@@ -10,3 +11,6 @@ script = ExtResource("1_aacku")
 texture = ExtResource("1_dju2p")
 
 [node name="BodyContainer" type="Node" parent="."]
+
+[node name="EatSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ulu0y")

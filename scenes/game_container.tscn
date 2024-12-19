@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bxlkuq7ywkey1"]
+[gd_scene load_steps=4 format=3 uid="uid://bxlkuq7ywkey1"]
 
 [ext_resource type="Script" path="res://scripts/game_container.gd" id="1_1o35l"]
+[ext_resource type="Theme" uid="uid://ujjmiw04b25i" path="res://themes/text-theme.tres" id="2_2bji2"]
+[ext_resource type="AudioStream" uid="uid://keb261abc6n" path="res://assets/sfx/hurt.wav" id="3_mynfn"]
 
 [node name="GameContainer" type="Node2D"]
 script = ExtResource("1_1o35l")
@@ -13,6 +15,7 @@ offset_left = 936.0
 offset_top = 24.0
 offset_right = 1076.0
 offset_bottom = 64.0
+theme = ExtResource("2_2bji2")
 text = "Score"
 
 [node name="ScoreValue" type="RichTextLabel" parent="."]
@@ -20,12 +23,17 @@ offset_left = 937.0
 offset_top = 75.0
 offset_right = 1077.0
 offset_bottom = 115.0
+theme = ExtResource("2_2bji2")
 text = "0"
 
 [node name="Extra" type="RichTextLabel" parent="."]
-offset_left = 935.0
+offset_left = 861.0
 offset_top = 209.0
-offset_right = 1075.0
-offset_bottom = 249.0
+offset_right = 1125.0
+offset_bottom = 283.0
+theme = ExtResource("2_2bji2")
 text = "
 "
+
+[node name="Death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_mynfn")

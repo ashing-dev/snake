@@ -15,4 +15,7 @@ func on_score_changed() -> void:
 	$ScoreValue.text = "%d" % game.score
 
 func on_game_over() -> void:
-	$Extra.text = "You died."
+	$Extra.text = "You died"
+	$Death.play()
+	await get_tree().create_timer(3.0).timeout
+	get_tree().change_scene_to_file("res://scenes/title.tscn")

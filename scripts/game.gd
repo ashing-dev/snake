@@ -32,11 +32,10 @@ func _check_collisions() -> void:
 	if _is_snake_touching_self() || _is_snake_touching_boundary():
 		timer.stop()
 		game_over.emit()
-		await get_tree().create_timer(3.0).timeout
-		get_tree().change_scene_to_file("res://scenes/title.tscn")
 
 	if _is_snake_touching_food():
 		snake.lengthen_snake = true
+		snake.play_eat_sound()
 		field.set_random_food_cell()
 		score += 50
 		score_changed.emit()
