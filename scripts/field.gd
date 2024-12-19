@@ -21,7 +21,7 @@ func _init(width: int, height: int):
 	add_child(food)
 
 
-func build_cells(width, height):
+func build_cells(width, height) -> void:
 	for y in height:
 		for x in width:
 			var is_boundary = false
@@ -39,7 +39,7 @@ func build_cells(width, height):
 			cells.push_back(cell)
 
 
-func set_random_food_cell():
+func set_random_food_cell() -> void:
 	var candidates = [] 
 	for cell in cells:
 		if cell.is_boundary:

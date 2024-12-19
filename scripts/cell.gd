@@ -7,7 +7,7 @@ var location: Vector2
 var is_boundary: bool
 
 
-func _ready():
+func _ready() -> void:
 	if is_boundary:
 		var texture = load("res://textures/boundary_cell.tres")
 		$Sprite2D.texture = texture

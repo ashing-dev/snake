@@ -26,7 +26,7 @@ var timer: Timer
 signal snake_moved
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	snake_queue.push_back(snake_start_position)
 
 	update_global_position()
@@ -36,12 +36,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	# The documentation seems to recommend using _process to capture input via the InputMap feature, vs
-	# _unhandled_input which has more a bit more complication/nuance.
-	# See https://docs.godotengine.org/en/stable/tutorials/inputs/inputevent.html
-
-	# BUG: This only checks against the last registered travel direction, NOT the actual last direction traveled.
-	# So in one tick you can still turn around into yourself. Relatively minor in the grand scheme of things. Fix later.
 	if Input.is_action_just_pressed("move_north"):
 		update_travel_direction(DIR_NORTH)
 	elif Input.is_action_just_pressed("move_south"):
