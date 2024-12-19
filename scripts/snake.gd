@@ -30,7 +30,7 @@ func _ready():
 
 	update_global_position()
 	update_rotation()
-	timer.timeout.connect(_on_tick)
+	timer.timeout.connect(on_tick)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -42,13 +42,13 @@ func _process(_delta: float) -> void:
 	# BUG: This only checks against the last registered travel direction, NOT the actual last direction traveled.
 	# So in one tick you can still turn around into yourself. Relatively minor in the grand scheme of things. Fix later.
 	if Input.is_action_just_pressed("move_north"):
-		_update_travel_direction(DIR_NORTH)
+		update_travel_direction(DIR_NORTH)
 	elif Input.is_action_just_pressed("move_south"):
-		_update_travel_direction(DIR_SOUTH)
+		update_travel_direction(DIR_SOUTH)
 	elif Input.is_action_just_pressed("move_east"):
-		_update_travel_direction(DIR_EAST)
+		update_travel_direction(DIR_EAST)
 	elif Input.is_action_just_pressed("move_west"):
-		_update_travel_direction(DIR_WEST)
+		update_travel_direction(DIR_WEST)
 
 	update_global_position()
 	update_rotation()
@@ -56,7 +56,7 @@ func _process(_delta: float) -> void:
 
 # Update the travel direction. If the new direction is an invalid option, the travel direction is not
 # changed. Note that in this case, validity is internal to the snake, so that it can't reverse on itself.
-func _update_travel_direction(dir: Vector2) -> void:
+func update_travel_direction(dir: Vector2) -> void:
 	match dir:
 		DIR_NORTH:
 			if travel_direction != DIR_SOUTH:
@@ -72,12 +72,12 @@ func _update_travel_direction(dir: Vector2) -> void:
 				travel_direction = DIR_WEST
 
 
-func _on_tick() -> void:
-	_move()
+func on_tick() -> void:
+	move()
 	snake_moved.emit()
 
 
-func _move() -> void:
+func move() -> void:
 	var old_location = snake_queue[0]
 	var new_location = old_location + travel_direction
 	if !lengthen_snake:
