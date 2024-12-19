@@ -16,6 +16,7 @@ var snake_queue: Array[Vector2] = []
 # Tracks the snake's movement direction. Input only influences the direction of movement. Movement itself happens
 # during a game tick.
 var travel_direction: Vector2 = DIR_NORTH
+var last_travel_direction: Vector2 = Vector2(0,0)
 var snake_start_position: Vector2 = Vector2(5, 5)
 var lengthen_snake: bool = false
 
@@ -59,16 +60,16 @@ func _process(_delta: float) -> void:
 func update_travel_direction(dir: Vector2) -> void:
 	match dir:
 		DIR_NORTH:
-			if travel_direction != DIR_SOUTH:
+			if last_travel_direction != DIR_SOUTH:
 				travel_direction = DIR_NORTH
 		DIR_SOUTH:
-			if travel_direction != DIR_NORTH:
+			if last_travel_direction != DIR_NORTH:
 				travel_direction = DIR_SOUTH
 		DIR_EAST:
-			if travel_direction != DIR_WEST:
+			if last_travel_direction != DIR_WEST:
 				travel_direction = DIR_EAST
 		DIR_WEST:
-			if travel_direction != DIR_EAST:
+			if last_travel_direction != DIR_EAST:
 				travel_direction = DIR_WEST
 
 
@@ -80,6 +81,7 @@ func on_tick() -> void:
 func move() -> void:
 	var old_location = snake_queue[0]
 	var new_location = old_location + travel_direction
+	last_travel_direction = travel_direction
 	if !lengthen_snake:
 		# Remove from the data model
 		var back = snake_queue.pop_back()
