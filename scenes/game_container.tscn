@@ -8,7 +8,7 @@
 script = ExtResource("1_1o35l")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(555, 305)
+position = Vector2(535, 284)
 
 [node name="ScoreLabel" type="RichTextLabel" parent="."]
 offset_left = 936.0
