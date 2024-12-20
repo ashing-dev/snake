@@ -18,27 +18,29 @@ theme_override_font_sizes/normal_font_size = 42
 text = "Snake Goes Brrr"
 
 [node name="CTA" type="RichTextLabel" parent="."]
-offset_left = 391.0
-offset_top = 270.0
-offset_right = 804.0
-offset_bottom = 323.0
+offset_left = 363.0
+offset_top = 286.0
+offset_right = 832.0
+offset_bottom = 339.0
 theme = ExtResource("2_kl6fk")
 theme_override_font_sizes/normal_font_size = 24
-text = "Press Enter To Continue"
+bbcode_enabled = true
+text = "[center]Press any key/gamepad button to Continue[/center]"
 
 [node name="Controls" type="RichTextLabel" parent="."]
-offset_left = 362.0
-offset_top = 467.0
-offset_right = 897.0
-offset_bottom = 657.0
+offset_left = 319.0
+offset_top = 473.0
+offset_right = 854.0
+offset_bottom = 620.0
 theme = ExtResource("2_kl6fk")
 theme_override_font_sizes/normal_font_size = 20
-text = "You have four movement options:
+bbcode_enabled = true
+text = "[center]You have four movement options:
 
 - WASD
 - Arrow Keys
 - Vim Keys
-- Controller (D-Pad or Left Stick)"
+- Controller (D-Pad or Left Stick)[/center]"
 
 [node name="StartSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_kvhho")

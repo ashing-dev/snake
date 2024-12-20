@@ -11,29 +11,45 @@ script = ExtResource("1_1o35l")
 position = Vector2(535, 284)
 
 [node name="ScoreLabel" type="RichTextLabel" parent="."]
-offset_left = 936.0
-offset_top = 24.0
-offset_right = 1076.0
-offset_bottom = 64.0
+offset_left = 923.0
+offset_top = 144.0
+offset_right = 1063.0
+offset_bottom = 184.0
 theme = ExtResource("2_2bji2")
 text = "Score"
 
 [node name="ScoreValue" type="RichTextLabel" parent="."]
-offset_left = 937.0
-offset_top = 75.0
-offset_right = 1077.0
-offset_bottom = 115.0
+offset_left = 924.0
+offset_top = 195.0
+offset_right = 1064.0
+offset_bottom = 235.0
 theme = ExtResource("2_2bji2")
 text = "0"
 
 [node name="Extra" type="RichTextLabel" parent="."]
-offset_left = 861.0
-offset_top = 209.0
-offset_right = 1125.0
-offset_bottom = 283.0
+offset_left = 848.0
+offset_top = 329.0
+offset_right = 1112.0
+offset_bottom = 403.0
 theme = ExtResource("2_2bji2")
 text = "
 "
 
 [node name="Death" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_mynfn")
+
+[node name="HighScoreLabel" type="RichTextLabel" parent="."]
+offset_left = 921.0
+offset_top = 6.0
+offset_right = 1061.0
+offset_bottom = 66.0
+theme = ExtResource("2_2bji2")
+text = "High Score"
+
+[node name="HighScoreValue" type="RichTextLabel" parent="."]
+offset_left = 922.0
+offset_top = 86.0
+offset_right = 1062.0
+offset_bottom = 126.0
+theme = ExtResource("2_2bji2")
+text = "0"
