@@ -24,19 +24,23 @@ func _init(width: int, height: int):
 func build_cells(width, height) -> void:
 	for y in height:
 		for x in width:
-			var is_boundary = false
-			is_boundary = is_boundary || x == 0
-			is_boundary = is_boundary || y == 0
-			is_boundary = is_boundary || x == width-1
-			is_boundary = is_boundary || y == height-1
 
 			# TODO: Pull boundary definitions from somewhere else so
 			# we can make more interesting fields.
 			var cell = cell_scene.instantiate()
-			cell.is_boundary = is_boundary
+			cell.is_boundary = determine_is_cell_boundary(x, y, width, height)
 			cell.location = Vector2(x, y)
 			cell.name = "Cell %d_%d" % [x, y]
 			cells.push_back(cell)
+
+func determine_is_cell_boundary(x: int, y: int, width: int, height: int) -> bool:
+	var is_outer_wall = false
+	is_outer_wall = is_outer_wall || x == 0
+	is_outer_wall = is_outer_wall || y == 0
+	is_outer_wall = is_outer_wall || x == width-1
+	is_outer_wall = is_outer_wall || y == height-1
+
+	return is_outer_wall
 
 
 func set_random_food_cell() -> void:
