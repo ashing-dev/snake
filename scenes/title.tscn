@@ -40,7 +40,7 @@ text = "[center]You have four movement options:
 - WASD
 - Arrow Keys
 - Vim Keys
-- Controller (D-Pad or Left Stick)[/center]"
+- Controller (Left Stick)[/center]"
 
 [node name="StartSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_kvhho")
