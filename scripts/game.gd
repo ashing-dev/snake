@@ -57,7 +57,9 @@ func new_snake(_field: Field, _timer: Timer) -> Snake:
 	var _snake = snake_scene.instantiate()
 	_snake.field = _field
 	_snake.timer = _timer
-	_snake.snake_start_position = Vector2(8,8) # TODO: Randomize starting location
+	var snake_start_x = randi_range(10, int(field.field_size.x) - 10)
+	var snake_start_y = randi_range(10, int(field.field_size.y) - 10)
+	_snake.snake_start_position = Vector2(snake_start_x, snake_start_y)
 
 	return _snake
 
